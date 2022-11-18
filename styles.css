@@ -91,6 +91,10 @@ legend {
 	font-weight: 400;
 }
 
+sup {
+	font-size: 12px;
+}
+
 form {
 	font-weight: 100;
 	font-size: 20px;
@@ -105,6 +109,26 @@ input {
 	border-radius: 8px;
 	border: 1px solid #d3d3d3;
 	margin-top: 8px;
+}
+
+input:required {
+	border: 1px solid blue;
+}
+
+input:focus {
+	outline: none;
+}
+
+input:invalid {
+	border: 1px solid red;
+}
+
+input:valid::before {
+	border: 1px solid #d3d3d3;
+}
+
+input:valid {
+	border: 1px solid green;
 }
 
 .grid-container {
