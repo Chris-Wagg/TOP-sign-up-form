@@ -1,20 +1,25 @@
-html {
+html body {
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
 }
 
-body {
+/* body {
 	padding: 0;
 	margin: 0;
-}
+} */
 
 .container {
 	/* border: 5px solid red; */
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
+	padding: 0;
+	margin: 0;
 }
 
 .left-container {
@@ -23,7 +28,21 @@ body {
 	position: relative;
 }
 
+.overlay-text {
+	width: 100%;
+	height: 15%;
+	background-color: rgb(237, 234, 229, 0.7);
+	position: absolute;
+	top: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 52px;
+	font-weight: 400;
+}
+
 .right-container {
+	height: 100vh;
 	width: 60vw;
 	display: flex;
 	flex-direction: column;
@@ -53,7 +72,7 @@ body {
 
 .bottom-container {
 	background-color: #faf9f7;
-	height: 33vh;
+	height: 34vh;
 }
 
 .image-text {
@@ -75,7 +94,7 @@ a:hover {
 
 img {
 	width: 40vw;
-	height: 100vh;
+	height: 100%;
 }
 
 fieldset {
@@ -111,23 +130,15 @@ input {
 	margin-top: 8px;
 }
 
-input:required {
-	border: 1px solid blue;
-}
-
-input:focus {
-	outline: none;
+input:optional {
+	border: 1px solid #d3d3d3;
 }
 
 input:invalid {
 	border: 1px solid red;
 }
 
-input:valid::before {
-	border: 1px solid #d3d3d3;
-}
-
-input:valid {
+input:required:valid {
 	border: 1px solid green;
 }
 
