@@ -221,17 +221,18 @@ button:active {
 }
 
 .error {
-	width: 100%;
-	padding: 0;
+	/* position: absolute; */
+	width: 50%;
+	padding-left: 8px;
 
 	font-size: 80%;
 	color: white;
 	background-color: #900;
-	border-radius: 0 0 5px 5px;
+	border-radius: 15px;
 
 	box-sizing: border-box;
 }
 
-.error.active {
+/* .error.active {
 	padding: 0.3em;
-}
+} */

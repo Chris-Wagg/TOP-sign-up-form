@@ -17,7 +17,7 @@ firstName.addEventListener('input', () => {
 		nameError.textContent = ''
 		nameError.className = 'error'
 	} else {
-		showError()
+		showNameError()
 	}
 })
 email.addEventListener('input', () => {
@@ -25,7 +25,7 @@ email.addEventListener('input', () => {
 		emailError.textContent = ''
 		emailError.className = 'error'
 	} else {
-		showError()
+		showEmailError()
 	}
 })
 password.addEventListener('input', () => {
@@ -33,7 +33,7 @@ password.addEventListener('input', () => {
 		passwordError.textContent = ''
 		passwordError.className = 'error'
 	} else {
-		showError()
+		showPasswordError()
 	}
 })
 passwordVerify.addEventListener('input', () => {
@@ -41,7 +41,7 @@ passwordVerify.addEventListener('input', () => {
 		passwordVerifyError.textContent = ''
 		passwordVerifyError.className = 'error'
 	} else {
-		showError()
+		showPasswordVerifyError()
 	}
 })
 
@@ -52,14 +52,40 @@ form.addEventListener('submit', (e) => {
 		!password.validity.valid ||
 		!passwordVerify.validity.valid
 	) {
-		showError()
+		alert('Please fill in the required areas')
 		e.preventDefault()
 	}
 })
 
 // #first-name, email, password, password-verify
-function showError() {
+function showNameError() {
 	if (firstName.validity.valueMissing) {
 		nameError.textContent = 'Please enter a name'
 	}
+	nameError.className = 'error active'
+}
+
+function showEmailError() {
+	if (email.validity.valueMissing) {
+		emailError.textContent = 'You need to enter an email address.'
+	} else if (email.validity.typeMismatch) {
+		emailError.textContent = 'Please enter a valid email address'
+	}
+	emailError.className = 'error active'
+}
+
+function showPasswordError() {
+	if (password.validity.valueMissing) {
+		passwordError.textContent = 'Please enter a password'
+	}
+	passwordError.className = 'error active'
+}
+
+function showPasswordVerifyError() {
+	if (passwordVerify.validity.valueMissing) {
+		passwordVerifyError.textContent = 'Please repeat the password'
+	} else if (passwordVerify.value !== password.value) {
+		passwordVerifyError.textContent = 'Password does not match'
+	}
+	passwordVerifyError.className = 'error active'
 }
