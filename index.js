@@ -1,25 +1,14 @@
-// #first-name, email, password, password-verify
-
 const form = document.querySelector('form')
-const firstName = document.getElementById('first-name')
-const email = document.getElementById('email')
-const password = document.getElementById('password')
-const passwordVerify = document.getElementById('password-verify')
+const firstName = document.querySelector('#first-name')
+const email = document.querySelector('#email')
+const password = document.querySelector('#password')
+const passwordVerify = document.querySelector('#password-verify')
 const nameError = document.querySelector('#first-name + span.error')
 const emailError = document.querySelector('#email + span.error')
 const passwordError = document.querySelector('#password + span.error')
 const passwordVerifyError = document.querySelector(
 	'#password-verify + span.error'
 )
-const button = document.querySelector('button')
-
-button.addEventListener('click', () => {
-	const passwordOne = document.getElementById('password').value
-	const passwordTwo = document.getElementById('password-verify').value
-	if (passwordTwo !== passwordOne) {
-		alert('Please enter matching passwords')
-	}
-})
 
 firstName.addEventListener('input', () => {
 	if (firstName.validity.valid) {
@@ -29,6 +18,7 @@ firstName.addEventListener('input', () => {
 		showNameError()
 	}
 })
+
 email.addEventListener('input', () => {
 	if (email.validity.valid) {
 		emailError.textContent = ''
@@ -46,7 +36,7 @@ password.addEventListener('input', () => {
 	}
 })
 passwordVerify.addEventListener('input', () => {
-	if (passwordVerify.validity.valid) {
+	if (passwordVerify.validity.valid || passwordVerify.value == '') {
 		passwordVerifyError.textContent = ''
 		passwordVerifyError.className = 'error'
 	} else {
@@ -54,22 +44,20 @@ passwordVerify.addEventListener('input', () => {
 	}
 })
 
-form.addEventListener('submit', () => {
-	if (
-		!firstName.validity.valid ||
-		!email.validity.valid ||
-		!password.validity.valid ||
-		!passwordVerify.validity.valid
-	) {
-		alert('Please fill in the required areas')
-		e.preventDefault()
+form.addEventListener('submit', (event) => {
+	if (firstName.validity.valueMissing) {
+		showNameError()
+	} else if (email.validity.valueMissing) {
+		showEmailError()
+	} else if (password.validity.valueMissing) {
+		showPasswordError()
+	} else if (passwordVerify.validity.valueMissing) {
+		showPasswordVerifyError()
+	} else if (password.value != passwordVerify.value) {
+		validateError()
 	}
+	event.preventDefault()
 })
-
-// form.addEventListener('submit', () => {
-// 	alert('Please fill in the required areas')
-// 	e.preventDefault()
-// })
 
 function showNameError() {
 	if (firstName.validity.valueMissing) {
@@ -88,17 +76,21 @@ function showEmailError() {
 }
 
 function showPasswordError() {
-	const typedPassword = password.value
 	if (password.validity.valueMissing) {
 		passwordError.textContent = 'Please enter a password'
 	}
 	passwordError.className = 'error active'
-	return typedPassword
 }
 
 function showPasswordVerifyError() {
 	if (passwordVerify.validity.valueMissing) {
 		passwordVerifyError.textContent = 'Please repeat the password'
 	}
+	passwordVerifyError.className = 'error active'
+}
+
+function validateError() {
+	passwordVerifyError.textContent =
+		'Please make sure the passwords are matching'
 	passwordVerifyError.className = 'error active'
 }
